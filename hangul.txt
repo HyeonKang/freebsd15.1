@@ -2,6 +2,7 @@ Font: ko-nanum-square
 
 pkg install fcitx5 fcitx5-configtool ko-fcitx5-hangul fcitx5-qt5 fcitx5-qt6 fcitx5-gtk2 fcitx5-gtk3 fcitx5-gtk4
 
+~/.shrc
 export XMODIFIERS="@im=fcitx"
 export GTK_IM_MODULE="fcitx"
 export QT_IM_MODULE="fcitx"
