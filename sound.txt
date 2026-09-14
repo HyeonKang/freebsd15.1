@@ -4,3 +4,6 @@ sudo pkg install pavucontrol xfce4-pulseaudio-plugin
 
 snd_hda_load="YES" -> /boot/loader.conf
 hw.snd.default_unit=1~3 -> /etc/sysctl.conf
+
+mixer vol 80
+test : cat /dev/random > /dev/dsp
