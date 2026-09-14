@@ -1,8 +1,16 @@
-생성된 스냅샷 목록 확인:
+부트 환경 목록 확인 : bectl list
+	--출력 결과에서 N은 현재 부팅된 상태(Now), R은 다음 재부팅 시 활성화될 상태
+새 부트 환경 생성	: bectl create 스냅샷이름
+부트 환경 활성화 (전환)	: bectl activate 스냅샷이름
+부트 환경 삭제		: bectl destroy 스냅샷이름
+
+
+
+{생성된 스냅샷 목록 확인:
 	zfs list -t snapshot
 하위 데이터셋 포함 생성 (재귀적 스냅샷)
 	zfs snapshot -r zroot@before_upgrade
 잘못 만든 스냅샷 삭제:
 	zfs destroy zroot/usr/home@backup_20260914
 스냅샷 시점으로 데이터 되돌리기 (롤백)
-	zfs rollback zroot/usr/home@backup_20260914
+	zfs rollback zroot/usr/home@backup_20260914}
