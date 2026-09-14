@@ -1,0 +1,8 @@
+생성된 스냅샷 목록 확인:
+	zfs list -t snapshot
+하위 데이터셋 포함 생성 (재귀적 스냅샷)
+	zfs snapshot -r zroot@before_upgrade
+잘못 만든 스냅샷 삭제:
+	zfs destroy zroot/usr/home@backup_20260914
+스냅샷 시점으로 데이터 되돌리기 (롤백)
+	zfs rollback zroot/usr/home@backup_20260914
