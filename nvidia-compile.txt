@@ -1,3 +1,30 @@
+FreeBSD 15.1 NVIDIA-DRM-Latest-Kmod Compile and Setup Guide
+
+1. Clone FreeBSD Ports Tree (Non-interactive/Batch):
+pkg install -y git
+git clone --depth 1 https://git.FreeBSD.org/ports.git /usr/ports
+
+2. Prepare Kernel Sources:
+git clone -b releng/15.1 https://git.freebsd.org/src.git /usr/src
+
+3. Compile and Install DRM and NVIDIA Modules (Using BATCH=yes to skip config dialogs):
+cd /usr/ports/graphics/drm-latest-kmod
+make BATCH=yes install clean
+
+cd /usr/ports/graphics/nvidia-drm-latest-kmod
+make BATCH=yes install clean
+
+4. Configure Kernel Module Loading (/boot/loader.conf):
+nvidia_driver_load="YES"
+nvidia-modeset_load="YES"
+nvidia-drm_load="YE
+hw.nvidia.registry.EnableGpuFirmware=1
+
+Update RC Configuration (/etc/rc.conf):
+kld_list="... nvidia-drm"
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#############################################################################################
+
 1. FreeBSD 15-STABLE 버전을 사용 중인 경우
 git clone --depth 1 -b stable/15 https://git.freebsd.org/src.git /usr/src
 2. FreeBSD 15.1-RELEASE 정식 버전을 사용 중인 경우
