@@ -1,0 +1,39 @@
+FreeBSD 15.1 Manual Partitioning Guide
+========================================
+
+1. UEFI Boot Layout (GPT)
+----------------------------------------
+No. | Type          | Size         | Mountpoint | Description
+----+---------------+--------------+------------+--------------------------------------
+1   | efi           | 200MB - 1GB  | /boot/efi  | FAT32 UEFI Boot Loader
+2   | freebsd-swap  | 1-2x RAM     | (none)     | Virtual Memory Swap Area
+3   | freebsd-ufs   | Remaining    | /          | Root File System (OS & Data)
+    | (or -zfs)     |              |            |
+
+2. Legacy Boot Layout (BIOS/CSM - GPT)
+----------------------------------------
+No. | Type          | Size         | Mountpoint | Description
+----+---------------+--------------+------------+--------------------------------------
+1   | freebsd-boot  | 512 KB       | (none)     | Boot code (Do NOT exceed 545 KB)
+2   | freebsd-swap  | 1-2x RAM     | (none)     | Virtual Memory Swap Area
+3   | freebsd-ufs   | Remaining    | /          | Root File System
+
+3. Advanced Multi-Partition Layout (UFS)
+----------------------------------------
+Mountpoint | Recommended Size | Description
+-----------+------------------+------------------------------------------------
+/          | 4 GB - 8 GB      | Base system files
+/var       | 4 GB - 10 GB     | Logs, mail spool, and temporary runtime data
+/tmp       | 2 GB - 4 GB      | Temporary files
+/usr       | 20 GB+           | User programs, ports collection
+/home      | Remaining        | User personal data storage
+
+4. Installation Steps in bsdinstall
+----------------------------------------
+1. Select [ Manual ] partitioning in the installer menu.
+2. Select your drive (e.g., ada0, nvme0n1) and select [ Create ] to build a GPT scheme.
+3. For each partition, select the free space, press [ Create ], and input:
+   - Type (e.g., efi, freebsd-swap, freebsd-ufs)
+   - Size (e.g., 512M, 4G, or leave empty for remaining space)
+   - Mountpoint (e.g., /boot/efi, /)
+4. Select [ Finish ] and then [ Commit ] to write changes to disk.
