@@ -1,1 +1,2 @@
+#!/bin/sh
 pkg install -y vim realtek-re-kmod sudo git dbus && git clone https://github.com/hyeonkang/freebad15.1.git && cp freebad15.1/rc.conf /etc && cp freebad15.1/loader.conf /boot && reboot
